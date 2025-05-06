@@ -71,7 +71,7 @@ class PsychiatricDataAnalytics:
         
     def load_sample_data(self):
         """Load sample data for demonstration purposes"""
-        # Sample patient data---After testing, USE REAL DATA FROM API or DATABASE
+        # Sample patient data---After testing USE REAL DATA FROM API or DATABASE
         # This is a simplified example; in practice, you would load from a database or API
         patient_data = [
             ("P001", 34, "F", "Major Depressive Disorder", ["Generalized Anxiety"], "2022-01-15"),
@@ -90,10 +90,8 @@ class PsychiatricDataAnalytics:
             
         # Convert to Pandas for visualization (in Databricks notebook)--PENDING
         # This would be done in a Databricks notebook environment
-        # For local testing, we can convert to Pandas DataFrame
-        # and use matplotlib/seaborn for visualization
+        # For local testing, we can convert to Pandas DataFrame and use matplotlib/seaborn for visualization
         # Note: In a real Databricks environment, you would use display() instead of plt.show()
-        # Convert to Pandas DataFrame for visualization
     def analyze_diagnosis_distribution(self):
         """Analyze distribution of primary diagnoses"""
         diagnosis_counts = self.patients_df.groupBy("diagnosis_primary") \
