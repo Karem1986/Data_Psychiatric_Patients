@@ -72,7 +72,6 @@ class PsychiatricDataAnalytics:
     def load_sample_data(self):
         """Load sample data for demonstration purposes"""
         # Sample patient data---After testing USE REAL DATA FROM API or DATABASE
-        # This is a simplified example; in practice, you would load from a database or API
         patient_data = [
             ("P001", 34, "F", "Major Depressive Disorder", ["Generalized Anxiety"], "2022-01-15"),
             ("P002", 28, "M", "Bipolar Disorder", ["Insomnia"], "2022-02-20"),
@@ -81,17 +80,15 @@ class PsychiatricDataAnalytics:
             ("P005", 52, "F", "Generalized Anxiety Disorder", ["Insomnia", "Depression"], "2022-02-01")
         ]
         
+        #  In Databrics community edition, the data is loaded from a CSV or JSON file
+        #  Use the "EEG_machinelearing_data_BRMH-2.csv" file if you decide to test this with 
+        #  the Databricks community edition
+        
+        
         # Convert to DataFrame
         self.patients_df = self.spark.createDataFrame(patient_data, 
             ["patient_id", "age", "gender", "diagnosis_primary", "diagnosis_secondary", "first_visit_date"])
-        
-        # Add more sample data for other schemas as needed
-        # For brevity, I'm just implementing the patient data here
-            
-        # Convert to Pandas for visualization (in Databricks notebook)--PENDING
-        # This would be done in a Databricks notebook environment
-        # For local testing, we can convert to Pandas DataFrame and use matplotlib/seaborn for visualization
-        # Note: In a real Databricks environment, you would use display() instead of plt.show()
+
     def analyze_diagnosis_distribution(self):
         """Analyze distribution of primary diagnoses"""
         diagnosis_counts = self.patients_df.groupBy("diagnosis_primary") \
