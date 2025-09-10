@@ -80,10 +80,9 @@ class PsychiatricDataAnalytics:
             ("P005", 52, "F", "Generalized Anxiety Disorder", ["Insomnia", "Depression"], "2022-02-01")
         ]
         
-        #  In Databrics community edition, the data is loaded from a CSV or JSON file
+        #  In Databrics free edition, the data is loaded from a CSV or JSON file
         #  Use the "EEG_machinelearing_data_BRMH-2.csv" file if you decide to test this with 
-        #  the Databricks community edition
-        
+        #  the Databricks free edition
         
         # Convert to DataFrame
         self.patients_df = self.spark.createDataFrame(patient_data, 
