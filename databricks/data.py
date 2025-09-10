@@ -6,7 +6,6 @@ from pyspark.ml.clustering import KMeans
 from pyspark.ml import Pipeline
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pandas as pd
 
 class PsychiatricDataAnalytics:
     """
