@@ -96,7 +96,7 @@ class PsychiatricDataAnalytics:
         
         diagnosis_dist = self.analyze_diagnosis_distribution()
         diagnosis_per_age = self.analyze_diagnosis_per_age()
-        iq_by_disorder = self.analyze_disorder_by_iq()
+        disorder_by_iq = self.analyze_disorder_by_iq()
         
         return {
             "diagnosis_distribution": diagnosis_dist,
