@@ -2,15 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-print("Local Python session starting...")
-
 class PsychiatricDataAnalytics:
     """
     A class for processing and analyzing psychiatric patient data
     to derive insights on treatment effectiveness, patient outcomes,
     and research support.
     """
-    
  
     def __init__(self, csv_path):
         """Load patient data from CSV"""
@@ -18,17 +15,29 @@ class PsychiatricDataAnalytics:
         self.patients_df = None
         
     def load_sample_data(self):
-        """Load sample data using pandas"""
+        print("Loading data...")
         self.patients_df = pd.read_csv(self.csv_path)
-        print("Sample data loaded:")
-        print(self.patients_df.head())
+        print("Original data loaded:")
+        print(self.patients_df.head(5))
+
+        # Delete all columns that contain the words 'delta', 'alpha', 'theta', or 'gamma'
+        keywords = ['delta', 'alpha', 'theta', 'gamma', 'highbeta', 'beta', '122']
+        drop_cols = [col for col in self.patients_df if any(kw in col.lower() for kw in keywords)]
+        # self.patients_df.drop(columns=drop_cols, inplace=True)
+        print("Cleaned data")
+        cleaned_df = self.patients_df.drop(columns=drop_cols)
+        # Replace NaN with No data
+        filled_na = cleaned_df.fillna("No value provided")
+        self.patients_df = filled_na
         
-        #  In Databrics, use the "EEG_machinelearing_data_BRMH-2.csv" file if you decide to test this with 
-        #  the Databricks free edition.
+        print(self.patients_df.head(5))
+        
+
+    # Show remaining columns
+
+        print("Remaining columns :", self.patients_df.columns.tolist())
+
     
-        print("Columns in dataset:", self.patients_df.columns.tolist())
-
-
     def analyze_diagnosis_distribution(self):
         """Analyze distribution of specific disorder"""
         diagnosis_counts = self.patients_df["specific.disorder"].value_counts().reset_index()
