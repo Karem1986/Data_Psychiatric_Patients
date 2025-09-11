@@ -72,21 +72,39 @@ class PsychiatricDataAnalytics:
 
         return diagnosis_age
     
+    def analyze_disorder_by_iq(self):
+        # Ensure IQ is numeric
+        self.patients_df["IQ"] = pd.to_numeric(self.patients_df["IQ"], errors="coerce")
 
+        disorder_by_iq = self.patients_df.groupby("specific.disorder")["IQ"].mean().sort_values(ascending=False).reset_index()
+        # disorder_by_iq.columns = ["specific.disorder", "IQ"]
+
+        # Visualization
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x="specific.disorder", y="IQ", data=disorder_by_iq)
+        plt.title("Distribution of Specific Disorder per IQ")
+        plt.xticks(rotation=45)
+        plt.savefig("diagnosis_per_IQ.png")
+        plt.tight_layout()
+        plt.show()
+
+        return disorder_by_iq
+    
     def run_complete_analysis(self):
         """Execute a complete analysis pipeline"""
         self.load_sample_data()
         
         diagnosis_dist = self.analyze_diagnosis_distribution()
         diagnosis_per_age = self.analyze_diagnosis_per_age()
+        iq_by_disorder = self.analyze_disorder_by_iq()
         
         return {
             "diagnosis_distribution": diagnosis_dist,
-            "diagnosis per age": diagnosis_per_age
+            "diagnosis per age": diagnosis_per_age,
+            "disorder_by_iq": disorder_by_iq
         }
 
 if __name__ == "__main__":
-    # For testing in local environment
     analytics = PsychiatricDataAnalytics("EEG.machinelearing_data_BRMH.csv")
     results = analytics.run_complete_analysis()
     print("Analysis complete")
